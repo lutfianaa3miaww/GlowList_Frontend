@@ -25,7 +25,7 @@ if (loading) {
 return (
     <div className="container mt-4">
         <div className="d-flex justify-content-between align-items-center mb-3">
-            <h2>Daftar Kategori GlowList</h2>
+            <h2> ꣑ৎ Daftar Kategori GlowList ꣑ৎ </h2>
         </div>
         <table className="table table-bordered table-striped">
             <thead className="table-primary">

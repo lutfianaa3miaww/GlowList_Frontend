@@ -89,6 +89,8 @@ export default function AddProduk() {
                         <option value="1">Sunscreen</option>
                         <option value="2">Moisturizer</option>
                         <option value="3">Cleanser</option>
+                        <option value="4">Serum</option>
+                        <option value="5">Face Wash</option>
                     </select>
                 </div>
 

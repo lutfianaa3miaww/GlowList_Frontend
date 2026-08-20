@@ -1,7 +1,7 @@
 export default function Tentang() {
     return (
         <div style={{ padding: "20px " }}>
-            <h2>Tentang Saya ۶ৎ</h2>
+            <h2>꣑ৎ Tentang Saya ۶ৎ</h2>
             <p><strong>Nama:</strong>Lutfiana Uswatul Khoiriyah</p>
             <p><strong>Kelas:</strong> XII RPL 1</p>
             <h3>Alasan Suka Skincare</h3>
