@@ -6,7 +6,11 @@ export default function Produk() {
     const navigate = useNavigate ();
     const getProduk = async () => {
         try {
-            const res = await fetch("http://localhost:5000/produk");
+            const res = await fetch(`http://localhost:5000/produk`, {
+                headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+            });
             const data = await res.json();
             setProduk(data);
         } catch (err) {
@@ -24,6 +28,9 @@ export default function Produk() {
             try {
                 const res = await fetch(`http://localhost:5000/produk/${id}`, {
                     method: "DELETE", 
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
                 });
                 if (res.ok) {
                     alert("Produk berhasil dihapus");
@@ -60,6 +67,7 @@ return (
                     <th>Judul</th>
                     <th>Deskripsi</th>
                     <th>Harga</th>
+                    <th>Nama File</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -72,6 +80,7 @@ return (
                             <td>{item.judul}</td>
                             <td>{item.deskripsi}</td>
                             <td>Rp{item.harga}</td>
+                            <td>{item.nama_file}</td>
 
                             <td>
                                 <button 

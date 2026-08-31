@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 export default function AddProduk() {
     const [formData, setFormData] = useState({
         judul: "",
         deskripsi: "",
         harga: "",
         id_kategori: "",
+        nama_file: "",
     });
 
+    
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
@@ -39,7 +43,7 @@ export default function AddProduk() {
             <h2 className="mb-3">Tambah Produk</h2>
             <form onSubmit={handleSubmit} className="card p-4 shadow-sm">
                 <div className="mb-3">
-                    <label className="form-label">Judul Produk</label>
+                    <label className="form-label">Judul Produk 𖹭</label>
                     <input
                     type="text"
                     name="judul"
@@ -52,7 +56,7 @@ export default function AddProduk() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Deskripsi</label>
+                    <label className="form-label">Deskripsi 𖹭</label>
                     <textarea
                     name="deskripsi"
                     value={formData.deskripsi}
@@ -63,7 +67,7 @@ export default function AddProduk() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Harga</label>
+                    <label className="form-label">Harga 𖹭</label>
                     <input
                     type="number"
                     name="harga"
@@ -76,7 +80,7 @@ export default function AddProduk() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Kategori</label>
+                    <label className="form-label">Kategori 𖹭</label>
                     <select
                     type="number"
                     name="id_kategori"
@@ -89,10 +93,21 @@ export default function AddProduk() {
                         <option value="1">Sunscreen</option>
                         <option value="2">Moisturizer</option>
                         <option value="3">Cleanser</option>
-                        <option value="4">Serum</option>
-                        <option value="5">Face Wash</option>
                     </select>
                 </div>
+
+                <div className="mb-3">
+                <label className="form-label">Nama File 𖹭</label>
+                <input
+                type="text"
+                name="nama_file"
+                value={formData.nama_file}
+                onChange={handleChange}
+                className="form-control"
+                placeholder="Masukkan Nama File"
+                required
+                />
+            </div>
 
                 <button type="submit" className="btn btn-success">
                     Simpan
