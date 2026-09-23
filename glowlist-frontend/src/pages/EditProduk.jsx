@@ -11,6 +11,7 @@ export default function EditProduk() {
         id_kategori: "",
         nama_file: "",
     });
+    const [kategori, setKategori] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -21,6 +22,15 @@ export default function EditProduk() {
             setLoading(false);
     })
     .catch((err) => console.error(err));
+}, [id]);
+
+useEffect(() => {
+        fetch("http://localhost:5000/kategori")
+        .then((res) => res.json())
+        .then((data) => {
+            setKategori(data);
+    })
+    .catch((err) => console.error("Gagal mengambil kategori:", err));
 }, [id]);
 
 
@@ -36,8 +46,7 @@ const handleSubmit = async (e) => {
     }
     await fetch(`http://localhost:5000/produk/${id}`, {
         method: "PUT",
-        headers: { 
-            "Content-Type": "application/json", 
+        headers: { "Content-Type": "application/json", 
             Authorization: `Bearer ${localStorage.getItem("token")}`,
          },
         body: JSON.stringify(formData),
@@ -90,19 +99,19 @@ return (
             </div>
 
             <div className="mb-3">
-                <label className="form-label">Kategori 𖹭</label>
+                <label className="form-label">Nama Kategori 𖹭</label>
                 <select
-                type="number"
                 name="id_kategori"
                 value={formData.id_kategori}
                 onChange={handleChange}
                 className="form-control"
-                placeholder="Masukkan Kategori"
                 >
                     <option value="">--- Pilih Kategori---</option>
-                    <option value="1">Sunscreen</option>
-                    <option value="2">Moisturizer</option>
-                    <option value="3">Cleanser</option>
+                    {kategori.map((k) => (
+                        <option key={k.id_kategori} value={k.id_kategori}>
+                        {k.kategori}
+                        </option>
+                    ))}
                 </select>
             </div>
 
