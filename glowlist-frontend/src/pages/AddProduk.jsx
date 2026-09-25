@@ -8,9 +8,8 @@ export default function AddProduk() {
         deskripsi: "",
         harga: "",
         id_kategori: "",
-        nama_file: "",
     });
-
+    const [fileBaru, setFileBaru] = useState(null);
     
     const navigate = useNavigate();
 
@@ -20,11 +19,22 @@ export default function AddProduk() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const data = new FormData();
+        data.append("judul", formData.judul);
+        data.append("deskripsi", formData.deskripsi);
+        data.append("harga", formData.harga);
+        data.append("id_kategori", formData.id_kategori);
+        if (fileBaru) {
+        data.append("file", fileBaru);
+        }
+
         try{
             const res = await fetch("http://localhost:5000/produk", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+                body: data,
             });
             if (res.ok) {
                 alert("produk berhasil ditambahkan!");
@@ -38,6 +48,7 @@ export default function AddProduk() {
             alert("Terjadi kesalahan saat menambah produk");
         }
     };
+
     return (
         <div className="container mt-4">
             <h2 className="mb-3">Tambah Produk</h2>
@@ -96,19 +107,15 @@ export default function AddProduk() {
                     </select>
                 </div>
 
-                <div className="mb-3">
-                <label className="form-label">Nama File 𖹭</label>
-                <input
-                type="text"
-                name="nama_file"
-                value={formData.nama_file}
-                onChange={handleChange}
-                className="form-control"
-                placeholder="Masukkan Nama File"
-                required
-                />
-            </div>
-
+        <div className="mb-3">
+            <label className="form-label">Foto Produk</label>
+            <input
+            type="file"
+            accept="image/*"
+            className="form-control"
+            onChange={(e) => setFileBaru(e.target.files[0])}
+            />
+        </div>
                 <button type="submit" className="btn btn-success">
                     Simpan
                 </button>

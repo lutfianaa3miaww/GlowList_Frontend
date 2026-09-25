@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
+
 export default function Produk() {
     const [produk, setProduk] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate ();
+
     const getProduk = async () => {
         try {
             const res = await fetch(`http://localhost:5000/produk`, {
@@ -67,7 +69,7 @@ return (
                     <th>Judul</th>
                     <th>Deskripsi</th>
                     <th>Harga</th>
-                    <th>Nama File</th>
+                    <th>Foto</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
@@ -80,7 +82,18 @@ return (
                             <td>{item.judul}</td>
                             <td>{item.deskripsi}</td>
                             <td>Rp{item.harga}</td>
-                            <td>{item.nama_file}</td>
+                            <td>
+                                {item.nama_file ? (
+                                   <img
+                                   src={`http://localhost:5000/uploads/${item.nama_file}`}
+                                   alt={item.judul}
+                                   width="70"
+                                   className="rounded"
+                                   />
+                                ) : (
+                                    <span className="text-muted">Tidak ada foto</span>
+                                )}
+                            </td>
 
                             <td>
                                 <button 
@@ -103,7 +116,7 @@ return (
                     ))
                 ) : (
                     <tr>
-                        <td colSpan="4" className="text-center">
+                        <td colSpan="7" className="text-center">
                             Belum ada produk
                         </td>
                     </tr>
